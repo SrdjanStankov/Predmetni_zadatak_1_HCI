@@ -44,6 +44,7 @@ namespace Predmetni_zadatak_1
 		private void AddButtonClick(object sender, RoutedEventArgs e)
 		{
 			AddComponentWindow window = new AddComponentWindow();
+			window.Owner = this;
 			window.ShowDialog();
 		}
 
@@ -56,6 +57,7 @@ namespace Predmetni_zadatak_1
 		{
 			int i = gridObjects.SelectedIndex;
 			DetailWindow detailWindow = new DetailWindow(Komponente[i]);
+			detailWindow.Owner = this;
 			detailWindow.ShowDialog();
 		}
 
@@ -63,6 +65,7 @@ namespace Predmetni_zadatak_1
 		{
 			int i = gridObjects.SelectedIndex;
 			AddComponentWindow window = new AddComponentWindow(Komponente[i], true);
+			window.Owner = this;
 			window.Show();
 		}
 	}

@@ -22,8 +22,6 @@ namespace Predmetni_zadatak_1
 	/// </summary>
 	public partial class AddComponentWindow : Window
 	{
-		public const string defaultValue = "<Popunite polje>";
-
 		private static int secretNumber = 1;
 
 		readonly Brush textBoxFrameBrushColor;
@@ -40,7 +38,6 @@ namespace Predmetni_zadatak_1
 		{
 			InitializeComponent();
 
-			InitializeDefaultValues();
 			komponenta = new Komponenta();
 
 			textBoxFrameBrushColor = nameTextBox.BorderBrush;
@@ -75,14 +72,6 @@ namespace Predmetni_zadatak_1
 			imageHolder.Source = k.ImageSource;
 		}
 
-		private void InitializeDefaultValues()
-		{
-			nameTextBox.Text = defaultValue;
-			descriptionTextBox.Text = defaultValue;
-			moneyTextBox.Text = defaultValue;
-
-			SetForegroundOfFields(Brushes.LightSlateGray);
-		}
 
 		private void SetForegroundOfFields(SolidColorBrush brush)
 		{
@@ -96,7 +85,7 @@ namespace Predmetni_zadatak_1
 		{
 			bool result = true;
 
-			if (nameTextBox.Text == defaultValue)
+			if (nameTextBox.Text == "")
 			{
 				result = false;
 				nameTextBox.BorderBrush = Brushes.Red;
@@ -105,7 +94,7 @@ namespace Predmetni_zadatak_1
 			{
 				komponenta.Naziv = nameTextBox.Text;
 			}
-			if (descriptionTextBox.Text == defaultValue)
+			if (descriptionTextBox.Text == "")
 			{
 				result = false;
 				descriptionTextBox.BorderBrush = Brushes.Red;
@@ -114,7 +103,7 @@ namespace Predmetni_zadatak_1
 			{
 				komponenta.Opis = descriptionTextBox.Text;
 			}
-			if (moneyTextBox.Text == defaultValue)
+			if (moneyTextBox.Text == "")
 			{
 				result = false;
 				moneyTextBox.BorderBrush = Brushes.Red;
@@ -159,7 +148,7 @@ namespace Predmetni_zadatak_1
 
 		private void NameTextBox_GotFocus(object sender, RoutedEventArgs e)
 		{
-			if (nameTextBox.Text == defaultValue)
+			if (nameTextBox.Text == "")
 			{
 				nameTextBox.Text = "";
 				nameTextBox.Foreground = Brushes.Black;
@@ -168,7 +157,7 @@ namespace Predmetni_zadatak_1
 		}
 		private void DescriptionTextBox_GotFocus(object sender, RoutedEventArgs e)
 		{
-			if (descriptionTextBox.Text == defaultValue)
+			if (descriptionTextBox.Text == "")
 			{
 				descriptionTextBox.Text = "";
 				descriptionTextBox.Foreground = Brushes.Black;
@@ -177,7 +166,7 @@ namespace Predmetni_zadatak_1
 		}
 		private void MoneyTextBox_GotFocus(object sender, RoutedEventArgs e)
 		{
-			if (moneyTextBox.Text == defaultValue)
+			if (moneyTextBox.Text == "")
 			{
 				moneyTextBox.Text = "";
 				moneyTextBox.Foreground = Brushes.Black;
@@ -196,7 +185,7 @@ namespace Predmetni_zadatak_1
 		{
 			if (nameTextBox.Text == "")
 			{
-				nameTextBox.Text = defaultValue;
+				nameTextBox.Text = "";
 				nameTextBox.Foreground = Brushes.LightSlateGray;
 			}
 		}
@@ -204,7 +193,7 @@ namespace Predmetni_zadatak_1
 		{
 			if (descriptionTextBox.Text == "")
 			{
-				descriptionTextBox.Text = defaultValue;
+				descriptionTextBox.Text = "";
 				descriptionTextBox.Foreground = Brushes.LightSlateGray;
 			}
 		}
@@ -212,7 +201,7 @@ namespace Predmetni_zadatak_1
 		{
 			if (moneyTextBox.Text == "")
 			{
-				moneyTextBox.Text = defaultValue;
+				moneyTextBox.Text = "";
 				moneyTextBox.Foreground = Brushes.LightSlateGray;
 			}
 		}

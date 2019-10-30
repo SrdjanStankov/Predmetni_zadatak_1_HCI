@@ -4,155 +4,129 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Predmetni_zadatak_1"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="window"
     Title="Dodavanje komponente"
-    Width="442"
-    Height="395.201"
+    Width="400"
+    Height="432"
+    Background="{DynamicResource MaterialDesignPaper}"
+    BorderBrush="#FFAEEA00"
+    BorderThickness="5"
     FontFamily="Arial"
     ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner"
     WindowStyle="None"
     mc:Ignorable="d">
     <Grid>
-        <Label
-            Width="45"
-            Height="30"
-            Margin="10,10,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
-            Content="Naziv"
-            FontFamily="Arial"
-            FontSize="14" />
-        <Label
-            Width="45"
-            Height="30"
-            Margin="10,36,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
-            Content="Opis"
-            FontFamily="Arial"
-            FontSize="14" />
-        <Label
-            Width="45"
-            Height="30"
-            Margin="10,145,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
-            Content="Cena"
-            FontFamily="Arial"
-            FontSize="14" />
-        <Label
-            Width="121"
-            Height="30"
-            Margin="160,146,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            HorizontalContentAlignment="Center"
-            VerticalContentAlignment="Center"
-            Content="Datum dodavanja"
-            FontFamily="Arial"
-            FontSize="14" />
-        <TextBox
-            x:Name="nameTextBox"
-            Width="360"
-            Height="18"
-            Margin="60,15,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            AcceptsTab="True"
-            BorderBrush="#FFABADB3"
-            FontFamily="Arial"
-            GotFocus="NameTextBox_GotFocus"
-            LostFocus="NameTextBox_LostFocus"
-            TextWrapping="Wrap" />
-        <TextBox
-            x:Name="descriptionTextBox"
-            Width="360"
-            Height="100"
-            Margin="60,40,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            AcceptsReturn="True"
-            FontFamily="Arial"
-            GotFocus="DescriptionTextBox_GotFocus"
-            LostFocus="DescriptionTextBox_LostFocus"
-            TextWrapping="Wrap" />
-        <TextBox
-            x:Name="moneyTextBox"
-            Width="97"
-            Height="18"
-            Margin="60,151,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FontFamily="Arial"
-            GotFocus="MoneyTextBox_GotFocus"
-            LostFocus="MoneyTextBox_LostFocus"
-            TextWrapping="Wrap" />
-        <DatePicker
-            x:Name="datePicker"
-            Width="137.125"
-            Height="25"
-            Margin="282.875,149.875,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            FirstDayOfWeek="Monday"
-            FontFamily="Arial"
-            GotFocus="DatePicker_GotFocus"
-            IsHitTestVisible="True"
-            LostFocus="DatePicker_LostFocus"
-            SelectedDateChanged="DatePicker_SelectedDateChanged"
-            UseLayoutRounding="False">
-            <DatePicker.BorderBrush>
-                <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" EndPoint="0.5,1">
-                    <GradientStop Offset="1" Color="#FFA3AEB9" />
-                    <GradientStop Offset="0.625" Color="#FF718597" />
-                    <GradientStop Offset="0.625" Color="#FF8399A9" />
-                    <GradientStop Color="#FF617584" />
-                </LinearGradientBrush>
-            </DatePicker.BorderBrush>
-        </DatePicker>
-        <Button
-            x:Name="fileDialogButton"
-            Width="121"
-            Height="30"
-            Margin="160,185,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="FileDialogButton_Click"
-            Content="Odaberi sliku"
-            FontFamily="Arial"
-            FontSize="16" />
-        <Image
-            x:Name="imageHolder"
-            Margin="121,220,120,66"
-            RenderTransformOrigin="0.03,0.385" />
-        <Button
-            x:Name="addButton"
-            Width="170"
-            Height="39"
-            Margin="10,335,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="AddButton_Click"
-            Content="Dodaj"
-            FontFamily="Arial"
-            FontSize="16" />
-        <Button
-            x:Name="exitButton"
-            Width="170"
-            Height="39"
-            Margin="250,335,0,0"
-            HorizontalAlignment="Left"
-            VerticalAlignment="Top"
-            Click="ExitButton_Click"
-            Content="Izađi"
-            FontFamily="Arial"
-            FontSize="16" />
+        <StackPanel Width="{Binding Width, ElementName=window}" Orientation="Vertical">
+            <DockPanel HorizontalAlignment="Stretch">
+                <TextBox
+                    x:Name="nameTextBox"
+                    Width="360"
+                    Margin="0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Naziv"
+                    FontFamily="Arial"
+                    GotFocus="NameTextBox_GotFocus"
+                    LostFocus="NameTextBox_LostFocus"
+                    Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                    TextWrapping="Wrap" />
+            </DockPanel>
+            <DockPanel HorizontalAlignment="Stretch">
+                <TextBox
+                    x:Name="descriptionTextBox"
+                    Width="360"
+                    Height="100"
+                    Margin="0,10"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Opis"
+                    AcceptsReturn="True"
+                    FontFamily="Arial"
+                    GotFocus="DescriptionTextBox_GotFocus"
+                    LostFocus="DescriptionTextBox_LostFocus"
+                    Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}"
+                    TextWrapping="Wrap" />
+            </DockPanel>
+            <DockPanel Width="360" HorizontalAlignment="Center">
+                <TextBox
+                    x:Name="moneyTextBox"
+                    Width="140"
+                    Margin="0,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Cena"
+                    FontFamily="Arial"
+                    GotFocus="MoneyTextBox_GotFocus"
+                    LostFocus="MoneyTextBox_LostFocus"
+                    Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
+                    TextWrapping="Wrap" />
+                <DatePicker
+                    x:Name="datePicker"
+                    Width="140"
+                    Height="auto"
+                    Margin="0,10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    materialDesign:HintAssist.Hint="Datum"
+                    FirstDayOfWeek="Monday"
+                    FontFamily="Arial"
+                    GotFocus="DatePicker_GotFocus"
+                    IsHitTestVisible="True"
+                    LostFocus="DatePicker_LostFocus"
+                    SelectedDateChanged="DatePicker_SelectedDateChanged"
+                    Style="{DynamicResource MaterialDesignFloatingHintDatePicker}"
+                    UseLayoutRounding="False" />
+            </DockPanel>
+            <DockPanel HorizontalAlignment="Stretch" />
+            <DockPanel Width="360" HorizontalAlignment="Center">
+                <Button
+                    x:Name="fileDialogButton"
+                    Width="140"
+                    Height="30"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Click="FileDialogButton_Click"
+                    Content="Odaberi sliku"
+                    FontFamily="Arial"
+                    FontSize="16" />
+                <Image
+                    x:Name="imageHolder"
+                    Width="140"
+                    Height="140"
+                    HorizontalAlignment="Right"
+                    RenderTransformOrigin="0.03,0.385" />
+            </DockPanel>
+            <DockPanel
+                Width="360"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <Button
+                    x:Name="addButton"
+                    Width="140"
+                    Margin="0,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Click="AddButton_Click"
+                    Content="Dodaj"
+                    FontFamily="Arial"
+                    FontSize="16"
+                    IsDefault="True" />
+                <Button
+                    x:Name="exitButton"
+                    Width="140"
+                    Margin="0,10"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Click="ExitButton_Click"
+                    Content="Izađi"
+                    FontFamily="Arial"
+                    FontSize="16"
+                    IsCancel="True" />
+            </DockPanel>
+        </StackPanel>
         <Button
             x:Name="secretButton"
             Width="26"
@@ -162,6 +136,5 @@
             Click="SecretButton_Click"
             Content=""
             Opacity="0" />
-
     </Grid>
 </Window>

@@ -7,8 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="DetailWindow"
     Width="457.968"
-    Height="207.132"
+    Height="217"
+    BorderBrush="#FFAEEA00"
+    BorderThickness="5"
     ResizeMode="NoResize"
+    WindowStartupLocation="CenterOwner"
     WindowStyle="None"
     mc:Ignorable="d">
     <Grid>
@@ -59,7 +62,8 @@
                     Click="exitButton_Click"
                     Content="Izađi"
                     FontFamily="Arial"
-                    FontSize="16" />
+                    FontSize="16"
+                    IsCancel="True" />
                 <Label
                     x:Name="moneyLabel"
                     Width="220"

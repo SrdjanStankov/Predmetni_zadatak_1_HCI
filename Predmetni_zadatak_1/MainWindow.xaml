@@ -8,10 +8,15 @@
     Title="Prodavnica kompjuterskih periferija"
     Width="634.921"
     Height="492.686"
+    Background="{DynamicResource MaterialDesignPaper}"
     FontFamily="Arial"
+    WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Grid>
-        <StackPanel Orientation="Vertical">
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Vertical">
             <Label
                 x:Name="titleLabel"
                 Width="560"
@@ -27,7 +32,6 @@
                 RenderTransformOrigin="0.411,0.515" />
             <DataGrid
                 x:Name="gridObjects"
-                Width="566"
                 Height="290"
                 Margin="25,5"
                 HorizontalAlignment="Center"
@@ -44,14 +48,15 @@
                 ItemsSource="{Binding Komponente}"
                 RowHeaderWidth="0">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn MinWidth="120" Header="Slika">
+                    <DataGridTemplateColumn Width="140" Header="Slika">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image
-                                    Name="slika"
-                                    MinWidth="120"
-                                    MinHeight="80"
-                                    Source="{Binding ImageSource}" />
+                                <Image Name="slika" Source="{Binding ImageSource}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -61,6 +66,11 @@
                         CanUserReorder="False"
                         Header="Naziv"
                         IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -74,6 +84,11 @@
                         Binding="{Binding Cena}"
                         Header="Cena u RSD"
                         IsReadOnly="True">
+                        <DataGridTextColumn.HeaderStyle>
+                            <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.HeaderStyle>
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -85,30 +100,29 @@
                         Width="100"
                         MinWidth="100"
                         MaxWidth="100"
-                        Header="Dugmad"
+                        Header="Opcije"
                         IsReadOnly="True">
+                        <DataGridTemplateColumn.HeaderStyle>
+                            <Style BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTemplateColumn.HeaderStyle>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel VerticalAlignment="Center" Orientation="Vertical">
-                                    <Label Width="3" />
                                     <Button
                                         Name="Details"
-                                        Width="75"
-                                        Height="20"
+                                        Margin="0,2"
                                         Click="Details_Click"
                                         Content="Detalji" />
-                                    <Label Width="3" />
                                     <Button
                                         Name="Edit"
-                                        Width="75"
-                                        Height="20"
+                                        Margin="0,2"
                                         Click="Edit_Click"
                                         Content="Izmeni" />
-                                    <Label Width="3" />
                                     <Button
                                         Name="Delete"
-                                        Width="75"
-                                        Height="20"
+                                        Margin="0,2"
                                         Click="Delete_Click"
                                         Content="Obrisi" />
                                     <Label Width="3" />
@@ -118,7 +132,10 @@
                     </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <DockPanel Width="{Binding Width, ElementName=gridObjects}" HorizontalAlignment="Stretch">
+            <DockPanel
+                Width="{Binding Width, ElementName=gridObjects}"
+                Margin="{Binding Margin, ElementName=gridObjects}"
+                HorizontalAlignment="Stretch">
                 <Button
                     x:Name="addButton"
                     Width="180"
@@ -129,7 +146,8 @@
                     Click="AddButtonClick"
                     Content="Dodaj uređaj"
                     FontFamily="Arial"
-                    FontSize="16" />
+                    FontSize="16"
+                    IsDefault="True" />
                 <Button
                     x:Name="exitButton"
                     Width="180"
@@ -140,7 +158,8 @@
                     Click="ExitButtonClick"
                     Content="Izlaz"
                     FontFamily="Arial"
-                    FontSize="16" />
+                    FontSize="16"
+                    IsCancel="True" />
             </DockPanel>
         </StackPanel>
     </Grid>
