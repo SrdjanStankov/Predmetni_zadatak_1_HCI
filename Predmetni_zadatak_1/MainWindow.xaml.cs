@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Classes;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Classes;
 
 namespace Predmetni_zadatak_1
 {
@@ -43,8 +30,10 @@ namespace Predmetni_zadatak_1
 
 		private void AddButtonClick(object sender, RoutedEventArgs e)
 		{
-			AddComponentWindow window = new AddComponentWindow();
-			window.Owner = this;
+			var window = new AddComponentWindow
+			{
+				Owner = this
+			};
 			window.ShowDialog();
 		}
 
@@ -55,17 +44,19 @@ namespace Predmetni_zadatak_1
 
 		private void Details_Click(object sender, RoutedEventArgs e)
 		{
-			int i = gridObjects.SelectedIndex;
-			DetailWindow detailWindow = new DetailWindow(Komponente[i]);
-			detailWindow.Owner = this;
+			var detailWindow = new DetailWindow(Komponente[gridObjects.SelectedIndex])
+			{
+				Owner = this
+			};
 			detailWindow.ShowDialog();
 		}
 
 		private void Edit_Click(object sender, RoutedEventArgs e)
 		{
-			int i = gridObjects.SelectedIndex;
-			AddComponentWindow window = new AddComponentWindow(Komponente[i], true);
-			window.Owner = this;
+			var window = new AddComponentWindow(Komponente[gridObjects.SelectedIndex], true)
+			{
+				Owner = this
+			};
 			window.Show();
 		}
 	}

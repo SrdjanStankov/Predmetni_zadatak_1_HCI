@@ -1,19 +1,11 @@
 ﻿using Classes;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Predmetni_zadatak_1
 {
@@ -23,9 +15,8 @@ namespace Predmetni_zadatak_1
 	public partial class AddComponentWindow : Window
 	{
 		private static int secretNumber = 1;
-
-		readonly Brush textBoxFrameBrushColor;
-		readonly Brush buttonFrameBrushColor;
+		private readonly Brush textBoxFrameBrushColor;
+		private readonly Brush buttonFrameBrushColor;
 
 		private BitmapSource bitmapSource;
 		private Komponenta komponenta;
@@ -49,8 +40,6 @@ namespace Predmetni_zadatak_1
 			komponenta = k;
 
 			FillAllFields(komponenta);
-
-			SetForegroundOfFields(Brushes.Black);
 		}
 
 		public AddComponentWindow(Komponenta k, bool change) : this(k)
@@ -72,20 +61,20 @@ namespace Predmetni_zadatak_1
 			imageHolder.Source = k.ImageSource;
 		}
 
-
-		private void SetForegroundOfFields(SolidColorBrush brush)
+		private void SetBorderBrushOfFields(Brush brush)
 		{
-			nameTextBox.Foreground = brush;
-			descriptionTextBox.Foreground = brush;
-			moneyTextBox.Foreground = brush;
-			datePicker.Foreground = brush;
+			nameTextBox.BorderBrush = brush;
+			descriptionTextBox.BorderBrush = brush;
+			moneyTextBox.BorderBrush = brush;
+			datePicker.BorderBrush = brush;
+			fileDialogButton.BorderBrush = brush;
 		}
 
 		private bool Validate()
 		{
 			bool result = true;
 
-			if (nameTextBox.Text == "")
+			if (string.IsNullOrEmpty(nameTextBox.Text))
 			{
 				result = false;
 				nameTextBox.BorderBrush = Brushes.Red;
@@ -94,7 +83,7 @@ namespace Predmetni_zadatak_1
 			{
 				komponenta.Naziv = nameTextBox.Text;
 			}
-			if (descriptionTextBox.Text == "")
+			if (string.IsNullOrEmpty(descriptionTextBox.Text))
 			{
 				result = false;
 				descriptionTextBox.BorderBrush = Brushes.Red;
@@ -103,7 +92,7 @@ namespace Predmetni_zadatak_1
 			{
 				komponenta.Opis = descriptionTextBox.Text;
 			}
-			if (moneyTextBox.Text == "")
+			if (string.IsNullOrEmpty(moneyTextBox.Text))
 			{
 				result = false;
 				moneyTextBox.BorderBrush = Brushes.Red;
@@ -148,74 +137,18 @@ namespace Predmetni_zadatak_1
 
 		private void NameTextBox_GotFocus(object sender, RoutedEventArgs e)
 		{
-			if (nameTextBox.Text == "")
-			{
-				nameTextBox.Text = "";
-				nameTextBox.Foreground = Brushes.Black;
-			}
 			nameTextBox.BorderBrush = textBoxFrameBrushColor;
 		}
 		private void DescriptionTextBox_GotFocus(object sender, RoutedEventArgs e)
 		{
-			if (descriptionTextBox.Text == "")
-			{
-				descriptionTextBox.Text = "";
-				descriptionTextBox.Foreground = Brushes.Black;
-			}
 			descriptionTextBox.BorderBrush = textBoxFrameBrushColor;
 		}
 		private void MoneyTextBox_GotFocus(object sender, RoutedEventArgs e)
 		{
-			if (moneyTextBox.Text == "")
-			{
-				moneyTextBox.Text = "";
-				moneyTextBox.Foreground = Brushes.Black;
-			}
 			moneyTextBox.BorderBrush = textBoxFrameBrushColor;
 		}
 		private void DatePicker_GotFocus(object sender, RoutedEventArgs e)
 		{
-			if (datePicker.SelectedDate != null)
-			{
-				datePicker.Foreground = Brushes.Black;
-			}
-		}
-
-		private void NameTextBox_LostFocus(object sender, RoutedEventArgs e)
-		{
-			if (nameTextBox.Text == "")
-			{
-				nameTextBox.Text = "";
-				nameTextBox.Foreground = Brushes.LightSlateGray;
-			}
-		}
-		private void DescriptionTextBox_LostFocus(object sender, RoutedEventArgs e)
-		{
-			if (descriptionTextBox.Text == "")
-			{
-				descriptionTextBox.Text = "";
-				descriptionTextBox.Foreground = Brushes.LightSlateGray;
-			}
-		}
-		private void MoneyTextBox_LostFocus(object sender, RoutedEventArgs e)
-		{
-			if (moneyTextBox.Text == "")
-			{
-				moneyTextBox.Text = "";
-				moneyTextBox.Foreground = Brushes.LightSlateGray;
-			}
-		}
-		private void DatePicker_LostFocus(object sender, RoutedEventArgs e)
-		{
-			if (datePicker.SelectedDate == null)
-			{
-				datePicker.Foreground = Brushes.LightSlateGray;
-			}
-		}
-
-		private void DatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-		{
-			datePicker.Foreground = Brushes.Black;
 			datePicker.BorderBrush = textBoxFrameBrushColor;
 		}
 
@@ -238,60 +171,61 @@ namespace Predmetni_zadatak_1
 				MessageBox.Show("Polja nisu dobro popunjena!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
+
 		private void FileDialogButton_Click(object sender, RoutedEventArgs e)
 		{
-			OpenFileDialog fileDialog = new OpenFileDialog
+			var fileDialog = new OpenFileDialog
 			{
 				Filter = "Images |*.png;*.jpg;*.bmp;*.gif;*.tif;*.wmp;*.ico",
 				CheckFileExists = true,
 				CheckPathExists = true,
 				Multiselect = false,
 				Title = "Odaberi sliku",
-				
+
 			};
 			fileDialogButton.BorderBrush = buttonFrameBrushColor;
 
 			// Kad se selektuje fajl
 			if (fileDialog.ShowDialog() == true)
 			{
-				BitmapCreateOptions bco = BitmapCreateOptions.PreservePixelFormat;
-				BitmapCacheOption bcco = BitmapCacheOption.Default;
+				var bco = BitmapCreateOptions.PreservePixelFormat;
+				var bcco = BitmapCacheOption.Default;
 
 				string extension = fileDialog.SafeFileName.Split('.').Last();
 				switch (extension)
 				{
 					case "bmp":
-						BmpBitmapDecoder bmpDecoder = new BmpBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
+						var bmpDecoder = new BmpBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
 						bitmapSource = bmpDecoder.Frames[0];
 						imageHolder.Source = bitmapSource;
 						break;
 					case "gif":
-						GifBitmapDecoder gifDecoder = new GifBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
+						var gifDecoder = new GifBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
 						bitmapSource = gifDecoder.Frames[0];
 						imageHolder.Source = bitmapSource;
 						break;
 					case "ico":
-						IconBitmapDecoder icoDecoder = new IconBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
+						var icoDecoder = new IconBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
 						bitmapSource = icoDecoder.Frames[0];
 						imageHolder.Source = bitmapSource;
 						break;
 					case "jpg":
-						JpegBitmapDecoder jpgDecoder = new JpegBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
+						var jpgDecoder = new JpegBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
 						bitmapSource = jpgDecoder.Frames[0];
 						imageHolder.Source = bitmapSource;
 						break;
 					case "png":
-						PngBitmapDecoder pngDecoder = new PngBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
+						var pngDecoder = new PngBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
 						bitmapSource = pngDecoder.Frames[0];
 						imageHolder.Source = bitmapSource;
 						break;
 					case "tif":
-						TiffBitmapDecoder tiffDecoder = new TiffBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
+						var tiffDecoder = new TiffBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
 						bitmapSource = tiffDecoder.Frames[0];
 						imageHolder.Source = bitmapSource;
 						break;
 					case "wmp":
-						WmpBitmapDecoder wmpDecoder = new WmpBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
+						var wmpDecoder = new WmpBitmapDecoder(new Uri(fileDialog.FileName), bco, bcco);
 						bitmapSource = wmpDecoder.Frames[0];
 						imageHolder.Source = bitmapSource;
 						break;
@@ -311,7 +245,7 @@ namespace Predmetni_zadatak_1
 		{
 			if (secretNumber < 4)
 			{
-				using (StreamReader reader = new StreamReader(Environment.CurrentDirectory + "\\komponenta" + secretNumber + ".txt"))
+				using (var reader = new StreamReader(Environment.CurrentDirectory + "\\komponenta" + secretNumber + ".txt"))
 				{
 					var imgcon = new ImageSourceConverter();
 					datePicker.SelectedDate = DateTime.Now;
@@ -325,7 +259,7 @@ namespace Predmetni_zadatak_1
 							descriptionTextBox.Text += reader.ReadLine();
 							descriptionTextBox.Text += Environment.NewLine;
 						}
-						BitmapImage img = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\mis.png"));
+						var img = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\mis.png"));
 						imageHolder.Source = (ImageSource)imgcon.ConvertFrom(img.UriSource);
 					}
 					else if (secretNumber == 2) // ucitavanje za tastaturu
@@ -335,7 +269,7 @@ namespace Predmetni_zadatak_1
 							descriptionTextBox.Text += reader.ReadLine();
 							descriptionTextBox.Text += Environment.NewLine;
 						}
-						BitmapImage img = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\tastatura.png"));
+						var img = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\tastatura.png"));
 						imageHolder.Source = (ImageSource)imgcon.ConvertFrom(img.UriSource);
 					}
 					else if (secretNumber == 3)
@@ -345,16 +279,18 @@ namespace Predmetni_zadatak_1
 							descriptionTextBox.Text += reader.ReadLine();
 							descriptionTextBox.Text += Environment.NewLine;
 						}
-						BitmapImage img = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\slusalice.png"));
+						var img = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\slusalice.png"));
 						imageHolder.Source = (ImageSource)imgcon.ConvertFrom(img.UriSource);
 					}
 
 					moneyTextBox.Text = reader.ReadLine();
 
-					SetForegroundOfFields(Brushes.Black);
-					secretNumber++; 
+					secretNumber++;
 				}
+
+				SetBorderBrushOfFields(textBoxFrameBrushColor);
 			}
 		}
+
 	}
 }

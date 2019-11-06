@@ -59,7 +59,7 @@
                     x:Name="exitButton"
                     Width="84"
                     Margin="5,0"
-                    Click="exitButton_Click"
+                    Click="ExitButton_Click"
                     Content="Izađi"
                     FontFamily="Arial"
                     FontSize="16"

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
 
@@ -14,7 +12,9 @@ namespace Classes
 		public int Cena { get; set; }
 		public DateTime DatumDodavanja { get; set; }
 		[XmlIgnore]
+#pragma warning disable CA2235 // Mark all non-serializable fields
 		public BitmapSource ImageSource { get; set; }
+#pragma warning restore CA2235 // Mark all non-serializable fields
 
 		public Komponenta(string naziv, string opis, int cena, DateTime datumDodavanja, BitmapSource bitmapSource)
 		{

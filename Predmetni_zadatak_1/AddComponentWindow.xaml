@@ -30,7 +30,6 @@
                     materialDesign:HintAssist.Hint="Naziv"
                     FontFamily="Arial"
                     GotFocus="NameTextBox_GotFocus"
-                    LostFocus="NameTextBox_LostFocus"
                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                     TextWrapping="Wrap" />
             </DockPanel>
@@ -46,7 +45,6 @@
                     AcceptsReturn="True"
                     FontFamily="Arial"
                     GotFocus="DescriptionTextBox_GotFocus"
-                    LostFocus="DescriptionTextBox_LostFocus"
                     Style="{DynamicResource MaterialDesignOutlinedTextFieldTextBox}"
                     TextWrapping="Wrap" />
             </DockPanel>
@@ -60,7 +58,6 @@
                     materialDesign:HintAssist.Hint="Cena"
                     FontFamily="Arial"
                     GotFocus="MoneyTextBox_GotFocus"
-                    LostFocus="MoneyTextBox_LostFocus"
                     Style="{DynamicResource MaterialDesignFloatingHintTextBox}"
                     TextWrapping="Wrap" />
                 <DatePicker
@@ -72,11 +69,10 @@
                     VerticalAlignment="Center"
                     materialDesign:HintAssist.Hint="Datum"
                     FirstDayOfWeek="Monday"
+                    Focusable="False"
                     FontFamily="Arial"
                     GotFocus="DatePicker_GotFocus"
                     IsHitTestVisible="True"
-                    LostFocus="DatePicker_LostFocus"
-                    SelectedDateChanged="DatePicker_SelectedDateChanged"
                     Style="{DynamicResource MaterialDesignFloatingHintDatePicker}"
                     UseLayoutRounding="False" />
             </DockPanel>
